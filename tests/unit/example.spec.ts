@@ -1,17 +1,45 @@
-import { mount } from "@vue/test-utils";
+import { mount, flushPromises } from "@vue/test-utils";
 import Timeline from "../../src/components/Timeline.vue";
 import { today, thisWeek, thisMonth } from "../../src/mocks";
 import { format } from "date-fns";
 
+jest.mock("axios", () => ({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  get: (url: string) => {
+    return Promise.resolve({
+      data: [today, thisWeek, thisMonth],
+    });
+  },
+}));
+
+async function loadTemplate() {
+  const wrapper = mount({
+    components: { Timeline },
+    template: `
+        <suspense>
+          <template #default>
+            <timeline />
+          </template>
+          <template #fallback>
+            Loading...
+          </template>
+        </suspense>
+      `,
+  });
+
+  await flushPromises();
+  return wrapper;
+}
+
 describe("Timeline", () => {
-  it("Renders today post default", () => {
-    const wrapper = mount(Timeline);
+  test("Renders today post default", async () => {
+    const wrapper = await loadTemplate();
 
     expect(wrapper.html()).toContain(format(today.created, "do MMMM"));
   });
 
-  it("Updated when the period is clicked", async () => {
-    const wrapper = mount(Timeline);
+  test("Updated when the period is clicked for this week", async () => {
+    const wrapper = await loadTemplate();
 
     await wrapper.get('[data-test="This Week"').trigger("click");
 
@@ -19,8 +47,8 @@ describe("Timeline", () => {
     expect(wrapper.html()).toContain(format(thisWeek.created, "do MMMM"));
   });
 
-  it("Updated when the period is clicked", async () => {
-    const wrapper = mount(Timeline);
+  test("Updated when the period is clicked for this month", async () => {
+    const wrapper = await loadTemplate();
 
     await wrapper.get('[data-test="This Month"').trigger("click");
 

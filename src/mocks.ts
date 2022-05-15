@@ -1,10 +1,5 @@
 import { subDays } from "date-fns";
-
-export interface Post {
-  id: string;
-  title: string;
-  created: Date;
-}
+import { Post } from "./store";
 
 export const today: Post = {
   id: "1",
