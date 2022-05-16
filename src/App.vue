@@ -15,8 +15,8 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import Timeline from "./components/Timeline.vue";
-import WaitSpinner from "./components/WaitSpinner.vue";
+import Timeline from "@/components/Timeline.vue";
+import WaitSpinner from "@/components/WaitSpinner.vue";
 
 export default defineComponent({
   name: "App",

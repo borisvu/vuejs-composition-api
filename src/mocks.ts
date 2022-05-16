@@ -1,5 +1,5 @@
 import { subDays } from "date-fns";
-import { Post } from "./store";
+import { Post } from "@/store";
 
 export const today: Post = {
   id: "1",

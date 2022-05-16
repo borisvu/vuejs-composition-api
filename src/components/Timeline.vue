@@ -23,8 +23,8 @@
 <script lang="ts">
 import { defineComponent, ref, computed } from "vue";
 import { isAfter, format, subDays, subWeeks, subMonths } from "date-fns";
-import { Post, useStore } from "../store";
-import TimelinePost from "./TimelinePost.vue";
+import { Post, useStore } from "@/store";
+import TimelinePost from "@/components/TimelinePost.vue";
 
 type Period = "Today" | "This Week" | "This Month";
 

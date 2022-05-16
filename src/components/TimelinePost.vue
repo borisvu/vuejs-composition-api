@@ -10,7 +10,7 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { format } from "date-fns";
-import { Post } from "../store";
+import { Post } from "@/store";
 
 export default defineComponent({
   // eslint-disable-next-line vue/multi-word-component-names

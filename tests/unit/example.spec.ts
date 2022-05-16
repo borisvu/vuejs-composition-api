@@ -1,6 +1,6 @@
 import { mount, flushPromises } from "@vue/test-utils";
-import Timeline from "../../src/components/Timeline.vue";
-import { today, thisWeek, thisMonth } from "../../src/mocks";
+import Timeline from "@/components/Timeline.vue";
+import { today, thisWeek, thisMonth } from "@/mocks";
 import { format } from "date-fns";
 
 jest.mock("axios", () => ({
